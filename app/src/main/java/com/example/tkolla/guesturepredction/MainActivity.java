@@ -170,24 +170,38 @@ public class MainActivity extends AppCompatActivity {
         }
         long runTime = (System.currentTimeMillis() - start);
         TextView mTextView = (TextView) findViewById(R.id.textView_Mobile);
+        TextView pcTextView = (TextView) findViewById(R.id.textView_PC);
+        pcTextView.setText("MatLab total Elapsed time: 22.556005 seconds.\n" +
+
+                " - Time includes load file, split to train & test, predict model and calculate the accuracy  \n" +
+
+                "Matlab Elapsed time: 1.339256 seconds. \n" +
+
+                "- Time taken to fit and predict decision tree model\n" +
+
+                "Accuracy = 99.51%");
 
         if(About > Father){
 
-            mTextView.setText("The actions is classified as About\n" + "Run Time: "+ runTime + " Milliseconds");
+            mTextView.setText("The actions is classified as About\n" + "Run Time: "
+                    + runTime + " Milliseconds\n" );
+            About = Father = 0;
         }
         else if(Father > About){
 
-            mTextView.setText("The actions is classified as Father\n" + "Run Time: " + runTime  + " Milliseconds");
-
+            mTextView.setText("The actions is classified as Father\n" + "Run Time: " + runTime
+                    + " Milliseconds\n" );
+            About = Father = 0;
         }
         else if(Error > 0){
             mTextView.setText("");
             Toast.makeText(getApplicationContext(), "Error with selected file", Toast.LENGTH_SHORT).show();
-
+            About = Father = 0;
         }
         else {
 
-            mTextView.setText("The action cannot be classified \n"  + "Run Time: " + runTime  + " Milliseconds");
+            mTextView.setText("The action cannot be classified \n"  + "Run Time: "
+                    + runTime  + " Milliseconds\n" + "Accuracy: Father = About = 50%\n");
         }
 
 
@@ -197,49 +211,46 @@ public class MainActivity extends AppCompatActivity {
     public int decisionTree(String[] row) {
 
         if (row.length == 53) {
-            if (Float.parseFloat(row[34]) < 161.525) {
-                if (Float.parseFloat(row[32]) < 0.940401) {
-                    if (Float.parseFloat(row[25]) < 172.152) {
-                        return 0;
-                    } else {
-                        if (Float.parseFloat(row[17]) < 0.970375) {
-                            return 0;
-                        } else {
-                            if (Float.parseFloat(row[51]) < -9.9028) {
-                                return 0;
-                            } else {
-                                if (Float.parseFloat(row[25]) < 206.946) {
-                                    if (Float.parseFloat(row[31]) < 210.386) {
-                                        return 0;
-                                    } else return 1;
-                                } else {
-                                    return 1;
-                                }
-                            }
-                        }
-                    }
-
-                } else {
+            if(Float.parseFloat(row[34]) < 161.563){
+                if(Float.parseFloat(row[24]) < 174.194){
                     return 0;
-                }
-
-            } else {
-
-                if (Float.parseFloat(row[31]) < 284.645) {
-                    if (Float.parseFloat(row[16]) < 175.874) {
-                        return 0;
-                    } else return 1;
-                } else {
-
-                    if (Float.parseFloat(row[26]) < 0.931994) {
-                        return 0;
-                    } else {
-                        if (Float.parseFloat(row[27]) < 21.6408) {
+                }else {
+                    if(Float.parseFloat(row[24]) < 206.374){
+                        if(Float.parseFloat(row[31]) < 210.24){
                             return 0;
                         } else return 1;
+                    } else {
+                        if(Float.parseFloat(row[10]) < 91.6609){
+                            if(Float.parseFloat(row[34]) < 129.268){
+                                return 1;
+                            } else return 0;
+                        } else {
+                            return 1;
+                        }
                     }
                 }
-
+            } else {
+                if(Float.parseFloat(row[31]) < 284.645){
+                    if(Float.parseFloat(row[30]) < 94.4394){
+                        if(Float.parseFloat(row[31]) < 208.048){
+                            return 1;
+                        } else return 0;
+                    } else return 0;
+                } else {
+                    if(Float.parseFloat(row[21]) < 74.9013){
+                        if(Float.parseFloat(row[25]) < 247.912){
+                            return 1;
+                        } else return 0;
+                    } else {
+                        if(Float.parseFloat(row[19]) < 823.607){
+                            if(Float.parseFloat(row[27]) < 21.2859){
+                                if(Float.parseFloat(row[28]) < 257.437){
+                                    return 0;
+                                } else return 1;
+                            } else return 1;
+                        } else return 0;
+                    }
+                }
             }
 
         }
